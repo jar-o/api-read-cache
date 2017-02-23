@@ -1,9 +1,12 @@
-import os
+import os, sys
 from app import create_app
 
 app = create_app()
 
 if __name__ == '__main__':
-   port = int(os.environ.get("PORT", 7101)) #TODO parameterize host, port, debug
-   app.run(host='0.0.0.0', port=port, debug=True)
+    try:
+        port = int(sys.argv[-1])
+    except ValueError:
+        port = 5000
+    app.run(host='0.0.0.0', port=port, debug=True)
    
