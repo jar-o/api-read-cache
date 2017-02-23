@@ -6,11 +6,17 @@ from redlock import RedLock
 cachesrv = redis.StrictRedis(
     host=Config.MASTER_CACHE_HOST,
     port=Config.MASTER_CACHE_PORT,
+    password=Config.MASTER_CACHE_PASSWORD,
     db=0)
 
 def master_cache(func):
     def wrapper(*args):
-        conn = [{'host': Config.MASTER_CACHE_HOST, 'port': Config.MASTER_CACHE_PORT, 'db': 0}]
+        conn = [{
+            'host': Config.MASTER_CACHE_HOST,
+            'port': Config.MASTER_CACHE_PORT,
+            'password': Config.MASTER_CACHE_PASSWORD,
+            'db': 0
+        }]
         k = str(args[0].__class__) + func.__name__
         v = cachesrv.get(k)
         if not v:
