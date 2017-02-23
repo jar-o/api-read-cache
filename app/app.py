@@ -29,16 +29,6 @@ def create_app(config=None, app_name=None, blueprints=None):
     return app
 
 def configure_app(app, config=None):
-    """Different ways of configurations."""
-
-    # http://flask.pocoo.org/docs/api/#configuration
-    app.config.from_object(Config.DefaultConfig)
-
-
-    if config:
-        app.config.from_object(config)
-        return
-
     # Get app mode from environment, default to local
     application_mode = os.getenv('APPLICATION_MODE', 'LOCAL')
     app.config.from_object(Config.get_config(application_mode))

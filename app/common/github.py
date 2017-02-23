@@ -27,9 +27,8 @@ class GithubGrab(object):
         if Config.GITHUB_API_TOKEN:
             self.headers['Authorization'] = 'token ' + Config.GITHUB_API_TOKEN
 
-    @master_cache
     def get_any(self, reqpath):
-        return json.dumps(self.__get_all(self.__get(self.gh_prefix + reqpath)))
+        return self.__get_all(self.__get(self.gh_prefix + reqpath))
 
     def __get(self, url = ''):
         if url.startswith('/'):

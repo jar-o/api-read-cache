@@ -5,7 +5,7 @@ from flask import (Blueprint, render_template, current_app, request,
                    flash, url_for, redirect, session, abort, jsonify, make_response)
 from app.common import GithubGrab, cache
 
-root = Blueprint('root', __name__)#, url_prefix='/') #TODO for views.py
+root = Blueprint('root', __name__)
 grab = GithubGrab()
 
 @root.route('/healthcheck', methods=['GET'])
@@ -31,3 +31,11 @@ def netflix_repos():
 @cache.cached()
 def netflix_members():
     return grab.all_netflix_members()
+
+# NOTE(james) Requests that land here are only cached by the individual nodes
+# running this app, not the master cache
+@root.route('/<path:dummy>')
+@cache.cached()
+def fallback(dummy):
+    print grab.get_any(request.path)
+    return jsonify(grab.get_any(request.path))
