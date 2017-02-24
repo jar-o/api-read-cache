@@ -2,7 +2,8 @@ import os
 from flask import Response
 from common.constants import INSTANCE_FOLDER_PATH
 
-# defaults to JSON mime type on all views
+# defaults to JSON mime type on all views. Simply modify the mime type below if
+# you ever switch to say... xml?
 class AppResponse(Response):
     default_mimetype = 'application/json'
 
@@ -10,7 +11,6 @@ class BaseConfig(object):
 
    PROJECT = "app"
 
-   # Get app root path, also can use flask.root_path.
    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
    DEBUG = False
