@@ -2,19 +2,16 @@ import os
 from flask import Flask
 import config as Config
 from .common import constants as COMMON_CONSTANTS, cache
-from .api import root  #, views TODO james
+from .api import root, view
 
 __all__ = ['create_app'] # For import *
 
-DEFAULT_BLUEPRINTS = [ root ]
+DEFAULT_BLUEPRINTS = [ root, view ]
 
 def create_app(config=None, app_name=None, blueprints=None):
-    """Create a Flask app."""
 
     if app_name is None:
         app_name = Config.DefaultConfig.PROJECT
-    if blueprints is None:
-        blueprints = DEFAULT_BLUEPRINTS
 
     app = Flask(
         app_name,
@@ -37,9 +34,10 @@ def configure_app(app, config=None):
     app.response_class = app.config['APP_RESPONSE']
 
 def configure_blueprints(app, blueprints):
-    for blueprint in blueprints:
+    for blueprint in DEFAULT_BLUEPRINTS:
         app.register_blueprint(blueprint)
 
+# TODO james
 def configure_error_handlers(app):
     # example
     @app.errorhandler(500)

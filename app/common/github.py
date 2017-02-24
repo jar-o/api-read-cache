@@ -38,17 +38,19 @@ class GithubGrab(object):
 
     def __get(self, url = ''):
         if url.startswith('/'):
-            return requests.get(self.gh_prefix + url)
+            return requests.get(self.gh_prefix + url, headers = self.headers)
         else:
-            return requests.get(url)
+            return requests.get(url, headers = self.headers)
 
     def __get_all(self, req):
         data = json.loads(req.content)
         if type(data) is not list:
             return data
         while req.links and 'next' in req.links:
-            data += json.loads(req.content)
+            print req.links['next']['url']
             req = self.__get(req.links['next']['url'])
+            data += json.loads(req.content)
+            print req.content
         return data
 
     @master_cache
