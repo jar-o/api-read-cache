@@ -21,7 +21,7 @@ def create_app(config=None, app_name=None, blueprints=None):
     configure_app(app, config)
     cache.init_app(app)
 
-    configure_blueprints(app, blueprints)
+    configure_blueprints(app, DEFAULT_BLUEPRINTS)
     configure_error_handlers(app)
     return app
 
@@ -34,7 +34,7 @@ def configure_app(app, config=None):
     app.response_class = app.config['APP_RESPONSE']
 
 def configure_blueprints(app, blueprints):
-    for blueprint in DEFAULT_BLUEPRINTS:
+    for blueprint in blueprints:
         app.register_blueprint(blueprint)
 
 # TODO james
