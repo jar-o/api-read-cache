@@ -4,8 +4,8 @@
 import os
 class Config:
     # This is the config for the  central cache server, that keeps the 'root'
-    # or raw cached responses from the Github API (not any derived ones in
-    # /views)'
+    # or raw responses cached from the Github API (not any derived ones on the
+    # /view/ endpoints)'
     MASTER_CACHE_HOST = 'localhost'
     MASTER_CACHE_PORT = 6379
     MASTER_CACHE_PASSWORD = os.environ.get('CACHE_PASSWORD')
