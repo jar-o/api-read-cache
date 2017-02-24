@@ -55,10 +55,8 @@ class GithubGrab(object):
         if type(data) is not list:
             return data
         while req.links and 'next' in req.links:
-            print req.links['next']['url']
             req = self.__get(req.links['next']['url'])
             data += json.loads(req.content)
-            print req.content
         return data
 
     @master_cache

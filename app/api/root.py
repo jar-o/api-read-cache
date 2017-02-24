@@ -35,5 +35,6 @@ def netflix_members():
 ## NOTE(james) Requests that land here are only cached by the individual nodes
 ## running this app, not the master cache
 @root.route('/<path:dummy>')
+@cache.cached()
 def fallback(dummy):
    return jsonify(grab.get_any(request.path))
