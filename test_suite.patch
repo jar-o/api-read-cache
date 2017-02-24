@@ -1,5 +1,5 @@
 --- api_test_suite.sh	2017-02-23 20:17:14.000000000 -0700
-+++ api_test_suite_MINE.sh	2017-02-23 20:26:51.000000000 -0700
++++ api_test_suite_MINE.sh	2017-02-23 20:36:36.000000000 -0700
 @@ -54,8 +54,9 @@ done
  describe "test-02-01: / key count = "
  
@@ -80,12 +80,23 @@
      pass
  else
      fail
-@@ -269,7 +273,7 @@ describe "test-06-01: /view/top/5/forks 
+@@ -268,8 +272,9 @@ fi
+ describe "test-06-01: /view/top/5/forks = "
  
  VALUE=$(curl -s "$BASE_URL/view/top/5/forks")
++VALUE=`echo $VALUE | tr -d '\n' | tr -d ' '`
  
 -if [[ "$VALUE" == '[["Netflix/Hystrix", 1169], ["Netflix/SimianArmy", 561], ["Netflix/Cloud-Prize", 530], ["Netflix/eureka", 464], ["Netflix/asgard", 421]]' ]]; then
-+if [[ "$VALUE" == '[ [ "Netflix/Hystrix", 1687 ], [ "Netflix/SimianArmy", 703 ], [ "Netflix/eureka", 675 ], [ "Netflix/zuul", 535 ], [ "Netflix/Cloud-Prize", 520 ] ]' ]]; then
++if [[ "$VALUE" == '[["Netflix/Hystrix",1687],["Netflix/SimianArmy",703],["Netflix/eureka",675],["Netflix/zuul",535],["Netflix/Cloud-Prize",520]]' ]]; then
+     pass
+ else
+     fail
+@@ -279,7 +284,7 @@ describe "test-06-01: /view/top/10/forks
+ 
+ VALUE=$(curl -s "$BASE_URL/view/top/10/forks")
+ 
+-if [[ "$VALUE" == '[["Netflix/Hystrix", 1169], ["Netflix/SimianArmy", 561], ["Netflix/Cloud-Prize", 530], ["Netflix/eureka", 464], ["Netflix/asgard", 421], ["Netflix/astyanax", 352], ["Netflix/curator", 327], ["Netflix/ice", 304], ["Netflix/zuul", 302], ["Netflix/exhibitor", 283]]' ]]; then
++if [[ "$VALUE" == '[["Netflix/Hystrix",1687],["Netflix/SimianArmy",703],["Netflix/eureka",675],["Netflix/zuul",535],["Netflix/Cloud-Prize",520],["Netflix/asgard",426],["Netflix/curator",359],["Netflix/astyanax",358],["Netflix/ice",345],["Netflix/ribbon",315]]' ]]; then
      pass
  else
      fail
