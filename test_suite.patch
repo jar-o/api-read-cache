@@ -1,5 +1,5 @@
 --- api_test_suite.sh	2017-02-23 20:17:14.000000000 -0700
-+++ api_test_suite_MINE.sh	2017-02-23 20:37:53.000000000 -0700
++++ api_test_suite_MINE.sh	2017-02-24 07:29:16.000000000 -0700
 @@ -54,8 +54,9 @@ done
  describe "test-02-01: / key count = "
  
@@ -87,7 +87,7 @@
 +VALUE=`echo $VALUE | tr -d '\n' | tr -d ' '`
  
 -if [[ "$VALUE" == '[["Netflix/Hystrix", 1169], ["Netflix/SimianArmy", 561], ["Netflix/Cloud-Prize", 530], ["Netflix/eureka", 464], ["Netflix/asgard", 421]]' ]]; then
-+if [[ "$VALUE" == '[["Netflix/Hystrix",1687],["Netflix/SimianArmy",703],["Netflix/eureka",675],["Netflix/zuul",535],["Netflix/Cloud-Prize",520]]' ]]; then
++if [[ "$VALUE" == '[["Netflix/Hystrix",1689],["Netflix/SimianArmy",703],["Netflix/eureka",674],["Netflix/zuul",535],["Netflix/Cloud-Prize",520]]' ]]; then
      pass
  else
      fail

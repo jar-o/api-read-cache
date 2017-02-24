@@ -17,6 +17,6 @@ class Config:
     # Each node caches responses too. Can be overridden at the view level.
     NODE_CACHE_CONFIG = {
         'CACHE_TYPE': 'simple',
-        #'CACHE_TYPE': 'null', # reset cache
+        #'CACHE_TYPE': 'null', # turns off node caches, useful when testing
         'CACHE_DEFAULT_TIMEOUT': 50 # seconds
     }

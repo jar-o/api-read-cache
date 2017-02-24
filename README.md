@@ -26,7 +26,7 @@ When the master cache content expires we use a [Redlock](https://redis.io/topics
 
 ## Setup
 
-**Prequisites**: Python/pip, Redis
+**Prerequisites**: Python/pip, Redis
 
 To get started, clone this repository, then `cd` into the folder and do
 
@@ -44,7 +44,7 @@ Note that `GITHUB_API_TOKEN` is optional, but you'll hit an API limit if you don
 
 Also, `run.py` takes a single optional parameter, that of the PORT number. If you omit this, it will default to `5000`.
 
-Additionally, the Redis server may require a password. In that case you can set the `CACHE_PASSWORD` environment variable.
+Additionally, your Redis server may require a password. In that case you can set the `CACHE_PASSWORD` environment variable.
 
 ### Configuration
 

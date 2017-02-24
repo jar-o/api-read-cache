@@ -37,4 +37,4 @@ def netflix_members():
 @root.route('/<path:dummy>')
 @cache.cached()
 def fallback(dummy):
-   return jsonify(grab.get_any(request.path))
+   return jsonify(grab.get(request.path))

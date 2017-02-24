@@ -34,43 +34,49 @@ def master_cache(func):
         return v
     return wrapper
 
-class GithubGrab(object):
-    def __init__(self):
-        self.gh_prefix = Config.GITHUB_API_PREFIX
+
+class ApiGrab(object):
+    def __init__(self, api_prefix):
+        self.api_prefix = api_prefix
         self.headers = {}
-        if Config.GITHUB_API_TOKEN:
-            self.headers['Authorization'] = 'token ' + Config.GITHUB_API_TOKEN
 
-    def get_any(self, reqpath):
-        return self.__get_all(self.__get(self.gh_prefix + reqpath))
+    def get(self, url):
+        return json.loads(self.get_req(url).content)
 
-    def __get(self, url = ''):
+    def get_req(self, url = ''):
         if url.startswith('/'):
-            return requests.get(self.gh_prefix + url, headers = self.headers)
+            return requests.get(self.api_prefix + url, headers = self.headers)
         else:
             return requests.get(url, headers = self.headers)
 
-    def __get_all(self, req):
+    def get_all(self, req):
         data = json.loads(req.content)
         if type(data) is not list:
             return data
         while req.links and 'next' in req.links:
-            req = self.__get(req.links['next']['url'])
+            req = self.get_req(req.links['next']['url'])
             data += json.loads(req.content)
         return data
 
+
+class GithubGrab(ApiGrab):
+    def __init__(self):
+        super(GithubGrab, self).__init__(Config.GITHUB_API_PREFIX)
+        if Config.GITHUB_API_TOKEN:
+            self.headers['Authorization'] = 'token ' + Config.GITHUB_API_TOKEN
+
     @master_cache
     def netflix_orgs(self):
-        return json.loads(self.__get('/orgs/Netflix').content)
+        return json.loads(self.get_req('/orgs/Netflix').content)
 
     @master_cache
     def github_root(self):
-        return json.loads(self.__get(self.gh_prefix).content)
+        return json.loads(self.get_req(self.api_prefix).content)
 
     @master_cache
     def all_netflix_repos(self):
-        return self.__get_all(self.__get('/orgs/Netflix/repos'))
+        return self.get_all(self.get_req('/orgs/Netflix/repos'))
 
     @master_cache
     def all_netflix_members(self):
-        return self.__get_all(self.__get('/orgs/Netflix/members'))
+        return self.get_all(self.get_req('/orgs/Netflix/members'))
