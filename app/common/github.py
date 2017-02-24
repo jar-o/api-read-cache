@@ -50,7 +50,8 @@ class ApiGrab(object):
             return requests.get(url, headers = self.headers)
 
     def get_all(self, url):
-        data = json.loads(self.get_req(url).content)
+        req = self.get_req(url)
+        data = json.loads(req.content)
         if type(data) is not list:
             return data
         while req.links and 'next' in req.links:
@@ -67,11 +68,11 @@ class GithubGrab(ApiGrab):
 
     @master_cache
     def netflix_orgs(self):
-        return json.loads(self.get_req('/orgs/Netflix').content)
+        return self.get('/orgs/Netflix')
 
     @master_cache
     def github_root(self):
-        return json.loads(self.get_req(self.api_prefix).content)
+        return self.get(self.api_prefix)
 
     @master_cache
     def all_netflix_repos(self):
