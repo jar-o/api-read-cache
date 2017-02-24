@@ -16,7 +16,7 @@ class BaseConfig(object):
    DEBUG = False
    TESTING = False
 
-   ADMINS = ['traptoy@gmail.com']
+   ADMINS = ['admin@example.com']
 
    APP_RESPONSE = AppResponse
 
