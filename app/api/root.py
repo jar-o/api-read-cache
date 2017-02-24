@@ -6,7 +6,6 @@ from flask import (Blueprint, render_template, current_app, request,
 from app.common import GithubGrab, cache
 
 root = Blueprint('root', __name__)
-
 grab = GithubGrab()
 
 @root.route('/healthcheck', methods=['GET'])
