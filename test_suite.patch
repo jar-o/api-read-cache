@@ -1,5 +1,5 @@
---- api_test_suite.sh	2017-02-23 18:31:55.000000000 -0700
-+++ api_test_suite_MINE.sh	2017-02-23 18:38:37.000000000 -0700
+--- api_test_suite.sh	2017-02-23 20:17:14.000000000 -0700
++++ api_test_suite_MINE.sh	2017-02-23 20:25:50.000000000 -0700
 @@ -54,8 +54,9 @@ done
  describe "test-02-01: / key count = "
  
@@ -80,12 +80,16 @@
      pass
  else
      fail
-@@ -269,7 +273,7 @@ describe "test-06-01: /view/top/5/forks 
+@@ -268,8 +272,11 @@ fi
+ describe "test-06-01: /view/top/5/forks = "
  
  VALUE=$(curl -s "$BASE_URL/view/top/5/forks")
++echo 
++echo 
++echo $VALUE
  
--if [[ "$VALUE" == '[["Netflix/Hystrix", 1686], ["Netflix/SimianArmy", 703], ["Netflix/Cloud-Prize", 674], ["Netflix/eureka", 534], ["Netflix/asgard", 520]]' ]]; then
-+if [[ "$VALUE" == '[["Netflix/Hystrix", 1169], ["Netflix/SimianArmy", 561], ["Netflix/Cloud-Prize", 530], ["Netflix/eureka", 464], ["Netflix/asgard", 421]]' ]]; then
+-if [[ "$VALUE" == '[["Netflix/Hystrix", 1169], ["Netflix/SimianArmy", 561], ["Netflix/Cloud-Prize", 530], ["Netflix/eureka", 464], ["Netflix/asgard", 421]]' ]]; then
++if [[ "$VALUE" == '[ [ "Netflix/Hystrix", 1687 ], [ "Netflix/SimianArmy", 703 ], [ "Netflix/eureka", 675 ], [ "Netflix/zuul", 535 ], [ "Netflix/Cloud-Prize", 520 ] ]' ]]; then
      pass
  else
      fail
