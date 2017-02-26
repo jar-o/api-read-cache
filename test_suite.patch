@@ -1,5 +1,5 @@
 --- api_test_suite.sh	2017-02-23 20:17:14.000000000 -0700
-+++ api_test_suite_MINE.sh	2017-02-24 07:29:16.000000000 -0700
++++ api_test_suite_MINE.sh	2017-02-25 19:10:03.000000000 -0700
 @@ -54,8 +54,9 @@ done
  describe "test-02-01: / key count = "
  
@@ -7,7 +7,7 @@
 +GH_COUNT=$(curl -s https://api.github.com |jq -r 'keys |.[]' |wc -l |awk '{print $1}')
  
 -if [[ $COUNT -eq 30 ]]; then
-+if [[ $COUNT -eq GH_COUNT ]]; then
++if [[ $COUNT -eq $GH_COUNT ]]; then
      pass
  else
      fail
