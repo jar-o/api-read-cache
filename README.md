@@ -50,6 +50,16 @@ Additionally, your Redis server may require a password. In that case you can set
 
 There are two primary configuration files. The Flask config file under `app/config.py` and the config for the business logic modules under `app/common/config.py`.
 
+### Testing
+
+You can test with the provided `api_test_suite.sh`. However, to get to at least 68% passing, I had to make some edits. See `test_suite.patch`. You should be able to do
+
+```
+patch api_test_suite.sh < test_suite.patch
+```
+
+then run `api_test_suite.sh` to verify.
+
 ## Unfinished business
 
 * There are no Flask unit tests or otherwise
