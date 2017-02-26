@@ -52,7 +52,7 @@ There are two primary configuration files. The Flask config file under `app/conf
 
 ### Testing
 
-You can test with the provided `api_test_suite.sh`. However, to get to at least 68% passing, I had to make some edits. See `test_suite.patch`. You should be able to do
+You can test with the originally provided `api_test_suite.sh`. However, to get to at least 68% passing, I had to make some edits. See `test_suite.patch`. You should be able to do
 
 ```
 patch api_test_suite.sh < test_suite.patch
